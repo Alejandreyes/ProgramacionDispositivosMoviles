@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.proyecto.alejandreyes.proyecto02.MainActivity">
+
+   <EditText
+       android:id="@+id/texto"
+       app:layout_constraintTop_toTopOf="parent"
+       android:layout_width="250dp"
+       app:layout_constraintBottom_toTopOf="@id/agregar"
+       android:layout_height="wrap_content"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       />
+
+    <Button
+        android:id="@+id/agregar"
+        app:layout_constraintTop_toBottomOf="@id/texto"
+        android:text="Agregar Texto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/texto"
+        app:layout_constraintStart_toStartOf="@id/texto"
+        app:layout_constraintRight_toRightOf="@id/texto"
+        app:layout_constraintEnd_toEndOf="@id/texto"
+        app:layout_constraintBottom_toTopOf="@id/mostrar"
+
+        />
+
+    <Button
+        android:id="@+id/mostrar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Mostrar Lista"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/agregar"
+        app:layout_constraintStart_toStartOf="@id/agregar"
+        app:layout_constraintEnd_toEndOf="@id/agregar"
+        app:layout_constraintRight_toRightOf="@id/agregar"
+
+
+        />
+
+</android.support.constraint.ConstraintLayout>
