@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+    <string name="pokemon">pokemon</string>
+    <string name="numero">N001</string>
+    <string name="nombrePokemon">Pokemon</string>
+    <string name="tipo">Type</string>
+    <string name="habilidadPrimariaTxt">Ability:</string>
+    <string name="habilidadOcultaTxt">Hidden Ability:</string>
+</resources>
