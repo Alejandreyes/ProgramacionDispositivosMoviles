@@ -2,6 +2,7 @@ package com.proyecto.alejandreyes.pokedex.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class DetaillPokemon extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        cargarPreferencias();
         super.onCreate(savedInstanceState);
         this.context = this ;
         Bundle bundle = getIntent().getExtras();
@@ -242,6 +244,15 @@ public class DetaillPokemon extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             TextView textView = toolbar.findViewById(R.id.titleToolbar);
 
+        }
+    }
+    private void cargarPreferencias() {
+        SharedPreferences preferencias = getSharedPreferences("themes",Context.MODE_PRIVATE);
+        String predeterminado = preferencias.getString("tema","Evee theme");
+        if(predeterminado.equals("Evee theme")){
+            setTheme(R.style.AppThemeNoActionBar);
+        }else{
+            setTheme(R.style.AppThemeNoActionBarTotodaile);
         }
     }
 }

@@ -3,6 +3,10 @@
     <color name="colorPrimary">#a1ffcc00</color>
     <color name="colorToolbar">#9B833A</color>
     <color name="colorPrimaryDark">#897c16</color>
-    <color name="colorCardView">#EFDB89</color>
+    <color name="colorCardView">#6befeadd</color>
     <color name="colorAccent">#892f01</color>
+    <color name="colorPrimaryT">#77acf2</color>
+    <color name="colorPrimaryDarkT">#0f75f9</color>
+    <color name="colorAccentT">#af010c</color>
+
 </resources>

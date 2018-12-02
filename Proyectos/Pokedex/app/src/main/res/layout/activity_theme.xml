@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Theme">
+    <include
+        android:id="@+id/themeTool"
+        layout="@layout/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/eveeTheme"
+        android:layout_width="match_parent"
+        android:layout_height="99dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/themeTool"
+        app:layout_constraintVertical_bias="0.2"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+
+            <ImageView
+                android:id="@+id/c1"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="100dp"
+                android:background="@color/colorCardView" />
+
+            <ImageView
+                android:id="@+id/c2"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/c1"
+                android:background="@color/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/c3"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/c2"
+                android:background="@color/colorPrimaryDark" />
+
+            <ImageView
+                android:id="@+id/a3"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/c3"
+                android:background="@color/colorAccent" />
+
+            <Switch
+                android:id="@+id/evee_switch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="0dp"
+                android:text="Evee theme" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:id="@+id/tema2"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/cambiarTema"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/eveeTheme"
+        app:layout_constraintVertical_bias="0.1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+
+            <ImageView
+                android:id="@+id/c4"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="100dp"
+                android:background="@color/colorCardView" />
+
+            <ImageView
+                android:id="@+id/c5"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/c4"
+                android:background="@color/colorPrimaryT" />
+
+            <ImageView
+                android:id="@+id/c6"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/c5"
+                android:background="@color/colorPrimaryDarkT" />
+
+            <ImageView
+                android:id="@+id/a2"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/c6"
+                android:background="@color/colorAccentT" />
+
+            <Switch
+                android:id="@+id/totodaile_switch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="0dp"
+                android:text="Totodaile" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <Button
+        android:id="@+id/cambiarTema"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Aceptar"
+        app:layout_constraintTop_toBottomOf="@id/tema2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

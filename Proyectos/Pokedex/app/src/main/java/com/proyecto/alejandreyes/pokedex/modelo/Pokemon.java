@@ -1,10 +1,13 @@
 package com.proyecto.alejandreyes.pokedex.modelo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Pride on 16/11/2018.
  */
 
-public class Pokemon {
+public class Pokemon implements Parcelable{
     private int number;
     private String name ;
     private  String url;
@@ -32,5 +35,15 @@ public class Pokemon {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
     }
 }

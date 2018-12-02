@@ -1,7 +1,11 @@
 package com.proyecto.alejandreyes.pokedex.Activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.support.constraint.Group;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -32,103 +36,77 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Retrofit retrofit;
     private static final String TAG = "MAINACTIVITY";
-    //private ArrayList<Pokemon> pokemons;
     private RecyclerView recyclerView;
     private ListaPokemonAdapter listaPokemonAdapter;
-
-    private int offset;
-    private boolean aptoParaCargar;
+    private  Group pantallaPrincipal,carga;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //setTheme(R.style.AppThemeNoActionBar);
+        cargarPreferencias();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pantallaPrincipal = findViewById(R.id.pantallaPrincipal);
+        carga = findViewById(R.id.pantallaCarga);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         listaPokemonAdapter = new ListaPokemonAdapter(this);
         recyclerView.setAdapter(listaPokemonAdapter);
         recyclerView.setHasFixedSize(true);
+
         int orientation = getResources().getConfiguration().orientation;
-        //GridLayoutManager layoutManager =  new GridLayoutManager(this, 3);;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             final GridLayoutManager layoutManager = new GridLayoutManager(this, 5);
             recyclerView.setLayoutManager(layoutManager);
-            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                @Override
-                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                    super.onScrolled(recyclerView, dx, dy);
-                    if (dy >0){
-                        int visibleItemCount = layoutManager.getChildCount();
-                        int totalItemCount = layoutManager.getItemCount();
-                        int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
 
-                        if(aptoParaCargar) {
-                            if ((visibleItemCount +pastVisibleItems ) >= totalItemCount) {
-                                aptoParaCargar = false;
-                                offset += 20;
-                                obtenerDatos(offset);
-                            }
-                        }
-                    }
-                }
-            });
         } else {
             final GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
             recyclerView.setLayoutManager(layoutManager);
-            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                @Override
-                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                    super.onScrolled(recyclerView, dx, dy);
-                    if (dy >0){
-                        int visibleItemCount = layoutManager.getChildCount();
-                        int totalItemCount = layoutManager.getItemCount();
-                        int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
-                        if(aptoParaCargar) {
-                            if ((visibleItemCount +pastVisibleItems ) >= totalItemCount) {
-                                aptoParaCargar = false;
-                                offset += 20;
-                                obtenerDatos(offset);
-                            }
-                        }
-                    }
-                }
-            });
+
         }
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://pokeapi.co/api/v2/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        aptoParaCargar = true;
-        offset = 0;
-        obtenerDatos(offset);
+        obtenerDatos();
         setUpToolBar();
+
     }
 
-    /**
-     * Metodo que sirve para ejecutar el codigo de retrofit
-     * @param offset
-     */
-    private void obtenerDatos(int offset) {
+    private void cargarPreferencias() {
+        SharedPreferences preferencias = getSharedPreferences("themes",Context.MODE_PRIVATE);
+        String predeterminado = preferencias.getString("tema","Evee theme");
+        if(predeterminado.equals("Evee theme")){
+            setTheme(R.style.AppThemeNoActionBar);
+        }else{
+            setTheme(R.style.AppThemeNoActionBarTotodaile);
+        }
+    }
+
+    private void obtenerDatos() {
         PokemonService service = retrofit.create(PokemonService.class);
-        Call<PokemonRespuesta> pokemonRespuestaCall = service.obtenerListaPokemon(20,offset);
+        Call<PokemonRespuesta> pokemonRespuestaCall = service.obtenerListaPokemon();
 
         pokemonRespuestaCall.enqueue(new Callback<PokemonRespuesta>() {
             @Override
             public void onResponse(Call<PokemonRespuesta> call, Response<PokemonRespuesta> response) {
-                aptoParaCargar = true;
+
                 if(response.isSuccessful()){
                     PokemonRespuesta pokemonRespuesta = response.body();
                     ArrayList<Pokemon> listaPokemon = pokemonRespuesta.getResults();
                     listaPokemonAdapter.adicionarListaPokemon(listaPokemon);
+                    carga.setVisibility(View.INVISIBLE);
+                    pantallaPrincipal.setVisibility(View.VISIBLE);
+
                 } else
                     Log.e(TAG, " on response "+ response.errorBody());
             }
             @Override
             public void onFailure(Call<PokemonRespuesta> call, Throwable t) {
-                aptoParaCargar = true;
                 Log.e(TAG," on Failure "+ t.getMessage());
             }
         });
+
     }
 
     /**
@@ -192,7 +170,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "homeButton - onOptionsItemSelected");
                 break;
             case R.id.tema:
-                Log.e(TAG, "tema - onOptionsItemSelected");
+                Intent intent = new Intent(MainActivity.this, Theme.class);
+                startActivity(intent);
                 break;
             default:
                 //Error Desconocido
@@ -215,4 +194,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+
 }
+
